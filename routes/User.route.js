@@ -104,10 +104,10 @@ userRouter.patch("/:id", async (req, res) => {
   }
 });
 
-app.put('/:id', async (req, res) => {
-  try {
+app.put('/edit/:id', async (req, res) => {
   const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
+  try {
   const user = await UserModel.findByIdAndUpdate({ _id: id }, {
     image : image,
     name : name,
