@@ -43,11 +43,11 @@ userRouter.post("/register", async (req, res) => {
           return res.send(err);
         } else {
           const user = new UserModel({
-            image,
-            name,
-            bio,
-            phone,
-            email,
+            image : image,
+            name : name,
+            bio : bio,
+            phone : phone,
+            email : email,
             password: secure_password,
           });
           await user.save();
