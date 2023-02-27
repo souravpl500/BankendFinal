@@ -108,14 +108,13 @@ userRouter.put('/:id', async (req, res) => {
   const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
   try {
-  const user = await UserModel.findByIdAndUpdate({ _id: id }, {
-    user.image : image,
-    user.name : name,
-    user.bio : bio,
-    user.phone : phone,
-    user.email : email,
-    user.password : await bcrypt.hash(password, 5),
-    });
+  const user = await UserModel.findByIdAndUpdate({ _id: id }, user.image = image,
+    user.name = name,
+    user.bio = bio,
+    user.phone = phone,
+    user.email = email,
+    user.password = await bcrypt.hash(password, 5),
+    );
 
   await user.save();
   res.send({ message: 'Profile updated successfully', users: user, });
