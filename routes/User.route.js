@@ -104,7 +104,7 @@ userRouter.patch("/:id", async (req, res) => {
   }
 });
 
-userRouter.put('/:id', async (req, res) => {
+userRouter.patch('/edit/:id', async (req, res) => {
   const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
   try {
