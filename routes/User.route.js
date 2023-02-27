@@ -113,11 +113,6 @@ app.put('/:id', async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  if (password) {
-    user.password = await bcrypt.hash(password, 10);
-    
-  }
-
   user.image = image,
   user.name = name,
   user.bio = bio,
