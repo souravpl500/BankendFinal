@@ -108,19 +108,15 @@ app.put('/:id', async (req, res) => {
   try {
   const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
-  const user = await UserModel.findById({ _id: id });
-  
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' });
-  }
-  user.image = image,
-  user.name = name,
-  user.bio = bio,
-  user.phone = phone,
-  user.email = email,
-  user.password = await bcrypt.hash(password, 5),
-  await user.save();
+  const user = await UserModel.findByIdAndUpdate({ _id: id }, {
+    image : image,
+    name : name,
+    bio : bio,
+    phone : phone,
+    email : email,
+    password : await bcrypt.hash(password, 5),})
 
+  await user.save();
   res.json({ message: 'Profile updated successfully', user });
   } catch (err) {
   console.log(err);
