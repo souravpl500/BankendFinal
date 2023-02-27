@@ -117,14 +117,13 @@ app.put('/:id', async (req, res) => {
     user.password = await bcrypt.hash(password, 10);
     
   }
-  const users = new UserModel({
-    image,
-    name,
-    bio,
-    phone,
-    email,
-    password: await bcrypt.hash(password, 5),
-  });
+
+  user.image = image,
+  user.name = name,
+  user.bio = bio,
+  user.phone = phone,
+  user.email = email,
+  user.password = await bcrypt.hash(password, 5),
   await user.save();
 
   res.json({ message: 'Profile updated successfully', user });
