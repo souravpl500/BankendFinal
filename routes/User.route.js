@@ -104,25 +104,6 @@ userRouter.patch("/:id", async (req, res) => {
   }
 });
 
-app.put('/:id', async (req, res) => {
-  try {
-  const id = req.params.id;
-  const { name, email, password, bio, phone, image } = req.body;
-  const user = await UserModel.findByIdAndUpdate({ _id: id }, {
-    image : image,
-    name : name,
-    bio : bio,
-    phone : phone,
-    email : email,
-    password : await bcrypt.hash(password, 5),})
-
-  await user.save();
-  res.json({ message: 'Profile updated successfully', user });
-  } catch (err) {
-  console.log(err);
-  res.status(500).json({ message: 'Internal server error' });
-  }
-  });
   
 
 module.exports = {
