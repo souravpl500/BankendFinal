@@ -106,34 +106,31 @@ userRouter.patch("/:id", async (req, res) => {
 
 app.put('/:id', async (req, res) => {
   try {
+  const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
-  const user = await UserModel.findById(req.user.id);
+  const user = await UserModel.findOne({ id });
   
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  
-  // Update the user details
   user.name = name || user.name;
+  user.image = image || user.image;
   user.email = email || user.email;
   
   if (password) {
     user.password = await bcrypt.hash(password, 10);
   }
-  
+
   user.bio = bio || user.bio;
   user.phone = phone || user.phone;
-  user.profilePicture = profilePicture || user.profilePicture;
   
   await user.save();
-  
   res.json({ message: 'Profile updated successfully', user });
   } catch (err) {
   console.log(err);
   res.status(500).json({ message: 'Internal server error' });
   }
   });
-  
   
 
 module.exports = {
