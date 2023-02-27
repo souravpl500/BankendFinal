@@ -108,7 +108,7 @@ app.put('/:id', async (req, res) => {
   try {
   const id = req.params.id;
   const { name, email, password, bio, phone, image } = req.body;
-  const user = await UserModel.findOne({ id });
+  const user = await UserModel.findById({ _id: id });
   
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
